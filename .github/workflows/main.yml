@@ -1,6 +1,7 @@
 name: Run Python Script Daily
 
 on:
+  workflow_dispatch:  # This allows manual triggering
   schedule:
     - cron: '0 2 * * *'  # This will run the script every day at 2 AM UTC
 
