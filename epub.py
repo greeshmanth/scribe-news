@@ -63,7 +63,7 @@ book.add_item(epub.EpubNcx())
 book.add_item(epub.EpubNav())
 
 # Save the book as an EPUB file
-filepath = date.today().strftime("%Y-%m-%d.epub")
+filepath = date.today().strftime("news-%Y-%m-%d.epub")
 epub.write_epub(filepath, book, {})
 print("EPUB created successfully!")
 utils.send_mail_to_kindle(filepath)
