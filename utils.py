@@ -48,7 +48,7 @@ def send_mail_to_kindle(file_path = "news.epub"):
     params: resend.Emails.SendParams = {
         "from": "Greeshmanth Koganti <greeshmanth@weiko.org>",
         "to": ["rg_OtPfEh@kindle.com"],
-        #"to": ["greeshmanth@weiko.org"],
+        "to": ["greeshmanth@weiko.org"],
         "subject": "News",
         "html": "News",
         "attachments" : [
