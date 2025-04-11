@@ -30,7 +30,5 @@ jobs:
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           KINDLE_EMAIL: ${{ secrets.KINDLE_EMAIL }}
-          BCC: ${{ secrets.BCC }}
-          FROM: ${{ secrets.FROM }}
-
+          SENDER: ${{ secrets.SENDER }}
 
