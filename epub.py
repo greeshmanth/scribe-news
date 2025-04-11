@@ -15,7 +15,7 @@ rss_urls = [
     ("Die Zeit","https://newsfeed.zeit.de/english/index")
 ]
 
-urls = utils.get_articles_from_feeds(rss_urls,1)
+urls = utils.get_articles_from_feeds(rss_urls,10)
 utils.get_new_cover_image()
 utils.edit_cover()
 
