@@ -4,6 +4,7 @@ import resend
 import base64
 from PIL import Image, ImageDraw, ImageFont
 from datetime import date
+import os
 
 def get_articles_from_feeds(rss_urls, count = 10):
     urls = []
@@ -39,16 +40,16 @@ def get_new_cover_image(filename="cover.jpg"):
 
 def send_mail_to_kindle(file_path = "news.epub"):
 
-    resend.api_key = "re_PYuK9JVV_425azDhwRKa5cMDGWqXPPpfW"
+    resend.api_key = os.environ.get('RESEND_API_KEY')
 
     # Read the file and encode it in Base64
     with open(file_path, "rb") as f:
         attachment_content = base64.b64encode(f.read()).decode("utf-8")  # Proper encoding
 
     params: resend.Emails.SendParams = {
-        "from": "Greeshmanth Koganti <greeshmanth@weiko.org>",
-        "to": ["rg_OtPfEh@kindle.com"],
-        "bcc": ["greeshmanth@weiko.org"],
+        "from": os.environ.get('FROM'),
+        "to": [os.environ.get('KINDLE_EMAIL')],
+        "bcc": [os.environ.get('BCC')],
         "subject": "News",
         "html": "News",
         "attachments" : [
