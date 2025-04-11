@@ -47,9 +47,9 @@ def send_mail_to_kindle(file_path = "news.epub"):
         attachment_content = base64.b64encode(f.read()).decode("utf-8")  # Proper encoding
 
     params: resend.Emails.SendParams = {
-        "from": os.environ.get('FROM'),
+        "from": os.environ.get('SENDER'),
         "to": [os.environ.get('KINDLE_EMAIL')],
-        "bcc": [os.environ.get('BCC')],
+        "bcc": [os.environ.get('SENDER')],
         "subject": "News",
         "html": "News",
         "attachments" : [
