@@ -11,13 +11,13 @@ rss_urls = [
     ("Detusche Welle","https://rss.dw.com/rdf/rss-en-top"),
     ("BBC","https://feeds.bbci.co.uk/news/world/rss.xml"),
     ("The Guardian", "https://www.theguardian.com/world/rss"),
-    ("The New Yorker","https://www.newyorker.com/feed/everything"),
+    ("The New Yorker","https://www.newyorker.com/feed/news"),
     ("Die Zeit","https://newsfeed.zeit.de/english/index")
 ]
 
 urls = utils.get_articles_from_feeds(rss_urls,10)
-utils.get_new_cover_image()
-utils.edit_cover()
+#utils.get_new_cover_image()
+#utils.edit_cover()
 
 # Create a new book
 book = epub.EpubBook()
@@ -40,6 +40,18 @@ for source, url_list in urls:
 
     for index, url in enumerate(url_list):
 
+        discard_urls = ["live-", "daily-cartoon"]        
+        
+        match = False
+        for test_url in discard_urls:
+            if test_url in url:
+                match = True
+                print(url)
+                break
+
+        if match:
+            continue    
+
         article = newspaper.article(url)
         title = article.title.split(" – DW")[0]
         text = article.text.replace("\n", "<br>")
@@ -47,7 +59,7 @@ for source, url_list in urls:
         print(title)
 
         chapter = epub.EpubHtml(title=title, file_name=source+str(index)+".xhtml", lang="en")
-        chapter.content = "<h1>" + title + "</h1><p>" + text + "</p>"
+        chapter.content = f"<h1>{title}</h1><p>{text}</p><a href='{url}'>{url}</a>"
 
         # Add chapter to book
         book.add_item(chapter)
@@ -66,7 +78,7 @@ book.add_item(epub.EpubNav())
 filepath = date.today().strftime("news-%Y-%m-%d.epub")
 epub.write_epub(filepath, book, {})
 print("EPUB created successfully!")
-utils.send_mail_to_kindle(filepath)
+#utils.send_mail_to_kindle(filepath)
 
 
 
