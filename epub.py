@@ -78,7 +78,7 @@ book.add_item(epub.EpubNav())
 filepath = date.today().strftime("news-%Y-%m-%d.epub")
 epub.write_epub(filepath, book, {})
 print("EPUB created successfully!")
-#utils.send_mail_to_kindle(filepath)
+utils.send_mail_to_kindle(filepath)
 
 
 
