@@ -16,8 +16,8 @@ rss_urls = [
 ]
 
 urls = utils.get_articles_from_feeds(rss_urls,10)
-#utils.get_new_cover_image()
-#utils.edit_cover()
+utils.get_new_cover_image()
+utils.edit_cover()
 
 # Create a new book
 book = epub.EpubBook()
